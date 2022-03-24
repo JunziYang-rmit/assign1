@@ -11,7 +11,7 @@ public class dbLoad {
 
     public static ArrayList<Page> heapFile = new ArrayList<>();
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args){
         startTime = System.currentTimeMillis();
         if (args.length == 3){
             if (args[0].equals("-p")){
@@ -130,7 +130,7 @@ public class dbLoad {
         System.out.println("It takes time "+(endTime-startTime)+"ms");
     }
 
-
+    //to filter the non-Int values
     public static boolean isNumber(String str) {
         char[] array = str.toCharArray();
         for (int i = 1; i < array.length-1; i++) {
@@ -287,9 +287,6 @@ class Page implements Serializable {
     public void addArtist(Artist artistsLine){
         artists.add(artistsLine);
     }
-    /*public ArrayList<Artist> getArtists(){
-        return artists;
-    }*/
 
     public int getPageSize(){
         int pageSize = 0;
