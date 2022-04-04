@@ -54,29 +54,39 @@ public class dbLoad {
             String[] columns = line.split(",", -1);
             artist = new Artist();
             if (!columns[1].equals("\"NULL\"")){
-                artist.setPersonName(columns[1]);
+                String str = columns[1];
+                str = str.substring(1,str.length()-1);
+                artist.setPersonName(str);
             }
             if (!columns[23].equals("\"NULL\"")){
-                //System.out.println(columns[23]);
                 String str = columns[23];
                 str = str.substring(1,str.length()-1);
                 artist.setBirthDate(str);
-                //System.out.println(str);
             }
             if (!columns[25].equals("\"NULL\"")){
-                artist.setBirthPlace_label(columns[25]);
+                String str = columns[25];
+                str = str.substring(1,str.length()-1);
+                artist.setBirthPlace_label(str);
             }
             if (!columns[40].equals("\"NULL\"")){
-                artist.setDeathDate(columns[40]);
+                String str = columns[40];
+                str = str.substring(1,str.length()-1);
+                artist.setDeathDate(str);
             }
             if (!columns[50].equals("\"NULL\"")){
-                artist.setField_label(columns[50]);
+                String str = columns[50];
+                str = str.substring(1,str.length()-1);
+                artist.setField_label(str);
             }
             if (!columns[52].equals("\"NULL\"")){
-                artist.setGenre_label(columns[52]);
+                String str = columns[52];
+                str = str.substring(1,str.length()-1);
+                artist.setGenre_label(str);
             }
             if (!columns[124].equals("\"NULL\"")){
-                artist.setThumbnail(columns[124]);
+                String str = columns[124];
+                str = str.substring(1,str.length()-1);
+                artist.setThumbnail(str);
             }
 
             if (isNumber(columns[133])&&(!columns[133].isEmpty())){
@@ -84,13 +94,19 @@ public class dbLoad {
                 //System.out.println(artist.getWikiPageID());
             }
             if (!columns[62].equals("\"NULL\"")){
-                artist.setInstrument_label(columns[62]);
+                String str = columns[62];
+                str = str.substring(1,str.length()-1);
+                artist.setInstrument_label(str);
             }
             if (!columns[73].equals("\"NULL\"")){
-                artist.setNationality_label(columns[73]);
+                String str = columns[73];
+                str = str.substring(1,str.length()-1);
+                artist.setNationality_label(str);
             }
             if (!columns[137].equals("\"NULL\"")){
-                artist.setDescription(columns[137]);
+                String str = columns[137];
+                str = str.substring(1,str.length()-1);
+                artist.setDescription(str);
             }
 
             if (page.getPageSize()<(pageSize-artist.getOneArtistSize())){
