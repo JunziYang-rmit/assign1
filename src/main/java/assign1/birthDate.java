@@ -93,6 +93,7 @@ public class birthDate {
         System.out.println("Total time taken is "+timeTaken);
     }
 
+    //process the invalid values
     public static Integer dateFormatProcess(String birthdayDate){
         Integer intBirthDay = 0;
         if (birthdayDate != null){
