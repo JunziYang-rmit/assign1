@@ -57,7 +57,11 @@ public class dbLoad {
                 artist.setPersonName(columns[1]);
             }
             if (!columns[23].equals("\"NULL\"")){
-                artist.setBirthDate(columns[23]);
+                //System.out.println(columns[23]);
+                String str = columns[23];
+                str = str.substring(1,str.length()-1);
+                artist.setBirthDate(str);
+                //System.out.println(str);
             }
             if (!columns[25].equals("\"NULL\"")){
                 artist.setBirthPlace_label(columns[25]);
@@ -143,9 +147,10 @@ public class dbLoad {
 }
 
 class Artist implements Serializable {
-    private static final long serialVersionUID = 1L;
+    //private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 6529685098267757690L;
     private Integer wikiPageID;
-    private String birthDate;
+    String birthDate;
     private String deathDate;
     private String personName,birthPlace_label,field_label,genre_label,instrument_label,nationality_label,thumbnail,description;
 
@@ -276,7 +281,8 @@ class Artist implements Serializable {
     }
 }
 class Page implements Serializable {
-    private static final long serialVersionUID = 1L;
+    //private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 6529685098267757690L;
     int pageSize;
     ArrayList<Artist> artists = new ArrayList<Artist>();
 
@@ -295,6 +301,5 @@ class Page implements Serializable {
         }
         return pageSize;
     }
-
 
 }

@@ -27,18 +27,13 @@ public class birthDate {
             endTime = System.currentTimeMillis();
             stdout();
         }
-       /*File file = new File("assign1/heap.txt");
-       start = 19700101;
-       end = 20020101;
-       readFile(file);
-       stdout();*/
     }
 
     public static void readFile(File file){
         FileInputStream fis = null;
         ObjectInputStream ois = null;
         try {
-            Page page;
+            Page page = null;
             fis = new FileInputStream(file);
             ois = new ObjectInputStream(fis);
             while (true){
@@ -53,7 +48,10 @@ public class birthDate {
 
             }
 
-        } catch (IOException e) {
+        } /*catch (FileNotFoundException e){
+            System.out.println(e.getMessage());
+            System.exit(0);
+        }*/ catch (IOException e) {
             e.printStackTrace();
 
         } catch (ClassNotFoundException e) {
@@ -61,8 +59,8 @@ public class birthDate {
             e.printStackTrace();
         } finally {
             try {
-                fis.close();
                 ois.close();
+                fis.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -73,7 +71,9 @@ public class birthDate {
     public static void birthdayQuery(){
         for (Page page : pages){
             for (Artist artist : page.artists){
+
                 int day = dateFormatProcess(artist.getBirthDate());
+                //int day = Integer.valueOf(artist.getBirthDate());
                 if (day>=start && day<=end){
                     String result = artist.getPersonName()+": "+day;
                     matchedRecords.add(result);
@@ -89,46 +89,42 @@ public class birthDate {
         for (String s : matchedRecords){
             System.out.println(s);
         }
-        long timeTaken = startTime - endTime;
+        long timeTaken = endTime - startTime;
         System.out.println("Total time taken is "+timeTaken);
     }
 
-    public static int dateFormatProcess(String birthdayDate){
-        if (birthdayDate.contains("\"")){
-            String str = "";
-            for (int i = 0; i < birthdayDate.length(); i++) {
-                if (birthdayDate.charAt(i) != '"'){
-                    str += birthdayDate.charAt(i);
+    public static Integer dateFormatProcess(String birthdayDate){
+        Integer intBirthDay = 0;
+        if (birthdayDate != null){
+            if (!(birthdayDate.contains("{"))){
+                if (birthdayDate.contains("T")){
+                    int indexOfT = birthdayDate.indexOf("T");
+                    birthdayDate = birthdayDate.substring(0,indexOfT);
+                }
+            }else {
+                int index = birthdayDate.indexOf("|");
+                birthdayDate = birthdayDate.substring(1,index);
+                if (birthdayDate.contains("T")){
+                    int indexOfT = birthdayDate.indexOf("T");
+                    birthdayDate = birthdayDate.substring(0,indexOfT);
                 }
             }
-            birthdayDate = str;
-        }
-        if (!birthdayDate.contains("{")){
-            if (birthdayDate.contains("T")){
-                int indexOfT = birthdayDate.indexOf("T");
-                birthdayDate = birthdayDate.substring(0,indexOfT);
+            if (birthdayDate.contains("/")){
+                birthdayDate.replace('/','-');
             }
-        }else {
-            int index = birthdayDate.indexOf("|");
-            birthdayDate = birthdayDate.substring(1,index);
-            if (birthdayDate.contains("T")){
-                int indexOfT = birthdayDate.indexOf("T");
-                birthdayDate = birthdayDate.substring(1,indexOfT);
+            DateFormat df1 = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = new Date();
+            try {
+                date = df1.parse(birthdayDate);
+            } catch (ParseException e) {
+                intBirthDay = 0;
+                return intBirthDay;
             }
+            DateFormat df2 = new SimpleDateFormat("yyyyMMdd");
+            String date2 = df2.format(date);
+            intBirthDay = Integer.valueOf(date2);
         }
-        if (birthdayDate.contains("/")){
-            birthdayDate.replace('/','-');
-        }
-        DateFormat df1 = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = new Date();
-        try {
-            date = df1.parse(birthdayDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        DateFormat df2 = new SimpleDateFormat("yyyyMMdd");
-        String date2 = df2.format(date);
-        int intBirthDay = Integer.valueOf(date2);
+
 
         return intBirthDay;
 
