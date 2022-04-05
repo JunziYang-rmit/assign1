@@ -295,6 +295,23 @@ class Artist implements Serializable {
         }
         return artistSize;
     }
+
+    /*@Override
+    public String toString() {
+        return "Artist{" +
+                "wikiPageID=" + wikiPageID +
+                ", birthDate='" + birthDate + '\'' +
+                ", deathDate='" + deathDate + '\'' +
+                ", personName='" + personName + '\'' +
+                ", birthPlace_label='" + birthPlace_label + '\'' +
+                ", field_label='" + field_label + '\'' +
+                ", genre_label='" + genre_label + '\'' +
+                ", instrument_label='" + instrument_label + '\'' +
+                ", nationality_label='" + nationality_label + '\'' +
+                ", thumbnail='" + thumbnail + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }*/
 }
 class Page implements Serializable {
     //private static final long serialVersionUID = 1L;
