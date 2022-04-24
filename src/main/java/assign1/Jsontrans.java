@@ -72,14 +72,16 @@ public class Jsontrans {
     };
         PrintStream ps = null;
         try {
-            ps = new PrintStream("data2.json");
+            ps = new PrintStream("data.json");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         System.setOut(ps);
+        System.out.print("[");
         for (Artist artist : artists){
             String json = JSON.toJSONString(artist,filter);
-            System.out.println("["+json+",");
+            System.out.print(json+",");
         }
+        System.out.print("]");
     }
 }
